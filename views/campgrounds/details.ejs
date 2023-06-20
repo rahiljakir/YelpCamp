@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>details</title>
+</head>
+
+<body>
+    <ul>
+        <li>Title : <%= campground.title %>
+        </li>
+        <li>location : <%= campground.location %>
+        </li>
+    </ul>
+    <a href="/campgrounds/<%=campground.id%>/edit">Edit</a>
+    <a href="/campgrounds">back</a>
+    <a href="/">back to home</a>
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campgrounds</title>
+</head>
+
+<body>
+    <a href="campgrounds/new">add new ones!</a>
+    <ul>
+        <% for(let campground of campgrounds) { %>
+            <li>
+                <%= campground.title %> <a href="/campgrounds/<%= campground.id %>">details</a>
+                    <form action="/campgrounds/<%= campground.id %>?_method=DELETE" method="post">
+                        <button>delete</button>
+                    </form>
+            </li>
+            <% } %>
+    </ul>
+
+</body>
+
+</html>
