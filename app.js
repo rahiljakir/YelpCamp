@@ -2,8 +2,10 @@ const express = require('express');
 const path = require('path');
 const { Campground } = require(path.join(__dirname, './models/campground'));
 const methodOverride = require('method-override');
+const ejsMate = require('ejs-mate');
 const app = express();
 
+app.engine('ejs', ejsMate)
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
@@ -22,17 +24,17 @@ app.get('/', (req, res) => {
 
 app.get('/campgrounds', async (req, res) => {
     const campgrounds = await Campground.find({});
-    res.render('campgrounds/campgrounds', { campgrounds });
+    res.render('campgrounds', { campgrounds });
 });
 
 app.get('/campgrounds/new', (req, res) => {
-    res.render('campgrounds/createCampgrounds');
+    res.render('createCampgrounds');
 });
 
 app.get('/campgrounds/:id', async (req, res) => {
     const { id } = req.params;
     const campground = await Campground.findById(id);
-    res.render('campgrounds/details', { campground });
+    res.render('details', { campground });
 });
 
 app.post('/campgrounds', async (req, res) => {
@@ -46,7 +48,7 @@ app.post('/campgrounds', async (req, res) => {
 
 app.get('/campgrounds/:id/edit', async (req, res) => {
     const campground = await Campground.findById(req.params.id)
-    res.render('campgrounds/edit', { campground });
+    res.render('edit', { campground });
 })
 
 app.put('/campgrounds/:id', async (req, res) => {
