@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
-const { db } = require('./dbconnect');
-
+require('./makingConnectionToDatabase');
 
 const Schema = mongoose.Schema;
 const campgroundSchema = new Schema({
@@ -11,4 +10,4 @@ const campgroundSchema = new Schema({
 });
 
 const Campground = mongoose.model('Compground', campgroundSchema);
-module.exports = { Campground, db };
+module.exports = { Campground };

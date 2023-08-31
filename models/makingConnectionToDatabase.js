@@ -8,6 +8,13 @@ mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
         console.log(error);
     });
 
-const db = mongoose.connection;
 
-module.exports = { db }
+mongoose.connection.on('error', (error) => {
+    console.log(error);
+});
+
+mongoose.connection.once('open', async () => {
+    console.log('opened!')
+})
+
+

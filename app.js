@@ -1,19 +1,20 @@
 const express = require('express');
 const path = require('path');
-const { Campground, db } = require('./models/campground');
+const { Campground } = require(path.join(__dirname, './models/campground'));
 const methodOverride = require('method-override');
 const app = express();
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));
-db.on('error', (error) => {
-    console.log(error);
+app.use((req, res, next) => {
+    if (req.query._method) {
+        req.method = req.query._method;
+    }
+    next();
 });
-db.once('open', async () => {
-    console.log('opened!')
-})
+
+
 
 app.get('/', (req, res) => {
     res.render('home');
